@@ -10,9 +10,11 @@
   "author": "shubham patil",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.0.1",
-    "short-id": "^0.1.0-1"
+    "short-id": "^0.1.0-1",
+    "uuid": "^13.0.0"
   }
 }

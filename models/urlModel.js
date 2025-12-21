@@ -1,5 +1,5 @@
 
-import mongoose, { Schema, trusted } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const urlSchema = new Schema({
 
@@ -14,8 +14,14 @@ const urlSchema = new Schema({
     },
     visitHistory: [
         { timestamp: Number }
-    ]
-}, { timeseries: true })
+    ],
+
+    createdBy: {
+        type:Schema.Types.ObjectId,
+        ref: "users"
+    }
+},
+    { timeseries: true })
 
 const URL = mongoose.model("url", urlSchema)
 
