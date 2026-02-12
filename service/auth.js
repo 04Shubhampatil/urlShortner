@@ -12,7 +12,9 @@ function getUser(id){
     return sessionIdToUserMap.get(id)//pass only id
 }
 
-
+function deleteUser (id){
+    return sessionIdToUserMap.delete(id)
+}
 export{
     setUser,
     getUser

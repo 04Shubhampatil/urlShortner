@@ -1,16 +1,16 @@
 import User from "../models/userModel.js"
 import { v4 as uuidv4 } from 'uuid';
-import {  setUser } from '../service/auth.js'
+import { setUser } from '../service/auth.js'
 const handelCreateUser = async (req, res) => {
     try {
         const { name, email, password } = req.body
 
-        if(!name || !email || !password){
-             return res.status(404).json({
-            success: false,
-            message: "all fildes required",
-            
-        })
+        if (!name || !email || !password) {
+            return res.status(404).json({
+                success: false,
+                message: "all fildes required",
+
+            })
 
         }
 
@@ -20,7 +20,7 @@ const handelCreateUser = async (req, res) => {
             password
         })
         return res.status(200).json({
-            success:true,
+            success: true,
             message: "user created",
             user
         })
@@ -47,8 +47,8 @@ const handelLogin = async (req, res) => {
             })
         }
         const sessionId = uuidv4();
-        setUser(sessionId,user)
-        res.cookie("uuid",sessionId)
+        setUser(sessionId, user)
+        res.cookie("uuid", sessionId)
 
         return res.status(200).json({
             success: true,
@@ -64,9 +64,34 @@ const handelLogin = async (req, res) => {
     }
 }
 
+const handleLogout = async (req, res) => {
+    try {
+        const sessionId = req.cookie?.uuid
+
+        if (sessionId) {
+            deleteUser(sessionId)
+        }
+        res.clearcookie("uuid")
+
+        return res.status(200).json({
+            success: true,
+            message: "logout",
+        })
+
+    } catch (error) {
+        console.log(error);
+        
+        res.status(500).json({
+            success: false,
+            message: "server erro",
+            error:error
+        })
+    }
+}
 
 
 export {
     handelCreateUser,
-    handelLogin
+    handelLogin,
+    handleLogout
 }

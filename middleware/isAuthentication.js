@@ -21,7 +21,7 @@ const restricLogedInUserOnly = (req, res, next) => {
             message: "user not authenticated"
         })
     }
-    req.user = user;
+    req.user = user;//
     next()
 
 }
